@@ -555,216 +555,95 @@
 
   .score-reset:hover { transform: scale(1.05); }
 
-  /* ✿ FEEDBACK */
-  .feedback-form {
+  /* ✿ GOOGLE FORM BOX */
+  .gform-box {
     background: #1a1030;
     border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 36px;
-    max-width: 680px;
-    box-shadow: 0 6px 30px rgba(168,85,247,0.15);
-    margin-bottom: 40px;
+    border-radius: 28px;
+    padding: 60px 48px;
+    max-width: 620px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(168,85,247,0.15);
+    position: relative;
+    overflow: hidden;
   }
 
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
+  .gform-box::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(168,85,247,0.2), transparent);
+    border-radius: 50%;
   }
 
-  @media(max-width:600px) { .form-row { grid-template-columns: 1fr; } }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
+  .gform-box::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(192,132,252,0.15), transparent);
+    border-radius: 50%;
   }
 
-  .form-group label {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1rem;
-    color: var(--rose);
+  .gform-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    animation: floatIcon 3s ease-in-out infinite;
+    display: block;
   }
 
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 12px 16px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.9rem;
+  @keyframes floatIcon {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .gform-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-style: italic;
     color: var(--text);
-    background: #0f0a1e;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    resize: none;
+    margin-bottom: 14px;
   }
 
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--rose);
-    box-shadow: 0 0 0 3px rgba(168,85,247,0.2);
-  }
-
-  .char-count {
-    font-size: 0.75rem;
+  .gform-desc {
+    font-size: 0.92rem;
     color: var(--muted);
-    text-align: right;
-    margin-top: 4px;
+    line-height: 1.8;
+    margin-bottom: 36px;
   }
 
-  .fb-submit {
+  .gform-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     background: linear-gradient(135deg, #7c3aed, #a855f7);
     color: white;
-    border: none;
+    text-decoration: none;
     border-radius: 100px;
-    padding: 13px 36px;
-    font-size: 0.9rem;
+    padding: 16px 40px;
+    font-size: 1rem;
     font-weight: 500;
-    cursor: pointer;
     font-family: 'Jost', sans-serif;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 6px 20px rgba(168,85,247,0.4);
-    width: 100%;
-  }
-
-  .fb-submit:hover { transform: scale(1.02); box-shadow: 0 10px 28px rgba(168,85,247,0.55); }
-
-  .fb-wall {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 18px;
-    margin-top: 10px;
-  }
-
-  .fb-empty {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 2;
-  }
-
-  .fb-card {
-    background: #1a1030;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 4px 16px rgba(168,85,247,0.1);
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 8px 28px rgba(168,85,247,0.4);
     position: relative;
-    transition: transform 0.25s;
-    animation: popIn 0.4s ease;
+    z-index: 1;
   }
 
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.92) translateY(10px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
+  .gform-btn:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 14px 36px rgba(168,85,247,0.55);
   }
 
-  .fb-card:hover { transform: translateY(-4px); }
+  .gform-arrow { transition: transform 0.2s; }
+  .gform-btn:hover .gform-arrow { transform: translateX(4px); }
 
-  .fb-card-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .fb-avatar {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  .fb-name {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.1rem;
-    color: var(--rose);
-  }
-
-  .fb-time {
-    font-size: 0.72rem;
+  .gform-note {
+    font-size: 0.75rem;
     color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .fb-mood {
-    margin-left: auto;
-    font-size: 1.3rem;
-  }
-
-  .fb-msg {
-    font-size: 0.88rem;
-    color: var(--text);
-    line-height: 1.7;
-    font-style: italic;
-  }
-
-  .fb-quote-mark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    color: var(--blush);
-    line-height: 0.5;
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .toast {
-    position: fixed;
-    bottom: 30px; left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: linear-gradient(135deg, var(--blush), var(--rose));
-    color: white;
-    padding: 14px 28px;
-    border-radius: 100px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    z-index: 9999;
-    transition: transform 0.4s ease;
-    box-shadow: 0 8px 24px rgba(232,160,166,0.4);
-    pointer-events: none;
-  }
-
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  .fb-delete {
-    position: absolute;
-    top: 12px; right: 14px;
-    background: none;
-    border: none;
-    color: #ddd;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-  .fb-delete:hover { color: var(--rose); }
-
-  .fb-section-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.4rem;
-    color: var(--rose);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .fb-count {
-    background: var(--blush);
-    color: white;
-    border-radius: 100px;
-    padding: 2px 10px;
-    font-size: 0.8rem;
-    font-family: 'Jost', sans-serif;
+    margin-top: 20px;
+    opacity: 0.7;
   }
 
   footer {
@@ -931,40 +810,15 @@
 <section>
   <div class="section-label">✿ leave a message</div>
   <h2 class="section-title">Say something <em>sweet</em> 🌸</h2>
-
-  <!-- Input Form -->
-  <div class="feedback-form">
-    <div class="form-row">
-      <div class="form-group">
-        <label>Your Name 🌸</label>
-        <input type="text" id="fb-name" placeholder="e.g. Priya, Riya..." maxlength="30"/>
-      </div>
-      <div class="form-group">
-        <label>Mood ✨</label>
-        <select id="fb-mood">
-          <option value="🌸">🌸 Soft</option>
-          <option value="💛">💛 Happy</option>
-          <option value="🔥">🔥 Hyped</option>
-          <option value="🥹">🥹 Emotional</option>
-          <option value="😂">😂 Funny</option>
-          <option value="💜">💜 Wholesome</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Your Message 💌</label>
-      <textarea id="fb-msg" placeholder="Tell Anshika something sweet..." maxlength="200" rows="3"></textarea>
-      <div class="char-count"><span id="char-num">0</span>/200</div>
-    </div>
-    <button class="fb-submit" onclick="submitFeedback()">Send Message 💌</button>
-  </div>
-
-  <!-- Messages Wall -->
-  <div class="fb-wall" id="fb-wall">
-    <div class="fb-empty" id="fb-empty">
-      <div style="font-size:2.5rem">💌</div>
-      <p>No messages yet... be the first to say something sweet!</p>
-    </div>
+  <div class="gform-box">
+    <div class="gform-icon">💌</div>
+    <h3 class="gform-title">Got something to say to Anshika?</h3>
+    <p class="gform-desc">Drop a sweet message, a compliment, a memory, or just say hi! Anshika would love to hear from you 💜</p>
+    <a href="https://forms.gle/GoYi7pUaU3maZ7LZ6" target="_blank" class="gform-btn">
+      <span>✍️ Leave a Message</span>
+      <span class="gform-arrow">→</span>
+    </a>
+    <p class="gform-note">✨ Opens Google Form · Takes less than 1 minute</p>
   </div>
 </section>
 
@@ -1022,102 +876,6 @@
     el.style.transition = `opacity 0.6s ${i * 0.05}s ease, transform 0.6s ${i * 0.05}s ease`;
     observer.observe(el);
   });
-
-  // FEEDBACK
-  const textarea = document.getElementById('fb-msg');
-  const charNum = document.getElementById('char-num');
-  if (textarea) {
-    textarea.addEventListener('input', () => {
-      charNum.textContent = textarea.value.length;
-    });
-  }
-
-  const avatarColors = ['#4c1d95','#6d28d9','#7c3aed','#2d1b69','#5b21b6','#4338ca'];
-  let feedbacks = JSON.parse(localStorage.getItem('anshika_feedbacks') || '[]');
-
-  function saveFeedbacks() {
-    localStorage.setItem('anshika_feedbacks', JSON.stringify(feedbacks));
-  }
-
-  function timeAgo(ts) {
-    const diff = Math.floor((Date.now() - ts) / 1000);
-    if (diff < 60) return 'just now';
-    if (diff < 3600) return Math.floor(diff/60) + 'm ago';
-    if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
-    return Math.floor(diff/86400) + 'd ago';
-  }
-
-  function renderFeedbacks() {
-    const wall = document.getElementById('fb-wall');
-    const empty = document.getElementById('fb-empty');
-    wall.innerHTML = '';
-    if (feedbacks.length === 0) {
-      wall.innerHTML = `<div class="fb-empty"><div style="font-size:2.5rem">💌</div><p>No messages yet... be the first to say something sweet!</p></div>`;
-      return;
-    }
-
-    // Count label
-    const countEl = document.createElement('div');
-    countEl.className = 'fb-section-title';
-    countEl.style.gridColumn = '1 / -1';
-    countEl.innerHTML = `Messages for Anshika <span class="fb-count">${feedbacks.length}</span>`;
-    wall.appendChild(countEl);
-
-    [...feedbacks].reverse().forEach((fb, idx) => {
-      const realIdx = feedbacks.length - 1 - idx;
-      const card = document.createElement('div');
-      card.className = 'fb-card';
-      const color = avatarColors[realIdx % avatarColors.length];
-      const initial = fb.name ? fb.name[0].toUpperCase() : '?';
-      card.innerHTML = `
-        <button class="fb-delete" onclick="deleteFeedback(${realIdx})" title="Delete">✕</button>
-        <div class="fb-card-top">
-          <div class="fb-avatar" style="background:${color}">${initial}</div>
-          <div>
-            <div class="fb-name">${fb.name || 'Anonymous'}</div>
-            <div class="fb-time">${timeAgo(fb.ts)}</div>
-          </div>
-          <div class="fb-mood">${fb.mood}</div>
-        </div>
-        <span class="fb-quote-mark">"</span>
-        <div class="fb-msg">${fb.msg}</div>
-      `;
-      wall.appendChild(card);
-    });
-  }
-
-  function submitFeedback() {
-    const name = document.getElementById('fb-name').value.trim();
-    const msg = document.getElementById('fb-msg').value.trim();
-    const mood = document.getElementById('fb-mood').value;
-
-    if (!msg) { showToast('Please write a message first 🌸'); return; }
-
-    feedbacks.push({ name: name || 'Anonymous', msg, mood, ts: Date.now() });
-    saveFeedbacks();
-    renderFeedbacks();
-
-    document.getElementById('fb-name').value = '';
-    document.getElementById('fb-msg').value = '';
-    document.getElementById('char-num').textContent = '0';
-    showToast('Message sent to Anshika! 💌');
-  }
-
-  function deleteFeedback(idx) {
-    feedbacks.splice(idx, 1);
-    saveFeedbacks();
-    renderFeedbacks();
-  }
-
-  function showToast(msg) {
-    let t = document.querySelector('.toast');
-    if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2800);
-  }
-
-  renderFeedbacks();
 
   // THIS OR THAT
   const totData = [
