@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anshika ✿ Personal Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush: #c084fc;
+    --rose: #a855f7;
+    --peach: #7c3aed;
+    --yellow: #FFE57A;
+    --lavender: #e9d5ff;
+    --cream: #0f0a1e;
+    --white: #1a1030;
+    --text: #f0e8ff;
+    --muted: #a78cc0;
+    --card: rgba(30, 15, 60, 0.85);
+    --border: rgba(168, 85, 247, 0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--rose);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--rose);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+  }
+
+  .petal {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatPetal linear infinite;
+    opacity: 0.5;
+  }
+  @keyframes floatPetal {
+    0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.5; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+  .blob1 { width: 500px; height: 500px; background: #7c3aed; top: -100px; right: -100px; }
+  .blob2 { width: 400px; height: 400px; background: #4c1d95; bottom: 100px; left: -100px; }
+  .blob3 { width: 300px; height: 300px; background: #6d28d9; top: 50%; left: 40%; }
+
+  header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 8vw;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-deco {
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    color: var(--rose);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(5rem, 13vw, 11rem);
+    font-weight: 300;
+    line-height: 0.85;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--rose);
+    font-weight: 600;
+  }
+
+  .hero-script {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--muted);
+    margin-top: 16px;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.9;
+    margin-top: 24px;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+
+  .hero-badge {
+    background: #1a1030;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    box-shadow: 0 4px 15px rgba(168,85,247,0.15);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+  }
+
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--rose), transparent);
+    animation: scrollAnim 1.5s ease-in-out infinite;
+  }
+  @keyframes scrollAnim { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .strip-wrap {
+    background: linear-gradient(90deg, #2d1b69, #4c1d95, #6d28d9, #4c1d95, #2d1b69);
+    padding: 18px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+  }
+
+  .strip-track {
+    display: flex;
+    animation: marquee 22s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .strip-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #e9d5ff;
+    padding: 0 32px;
+    white-space: nowrap;
+  }
+
+  .strip-dot {
+    width: 4px; height: 4px;
+    background: var(--rose);
+    border-radius: 50%;
+  }
+
+  section {
+    padding: 100px 8vw;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: var(--rose);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 50px;
+  }
+
+  .section-title em { font-style: italic; color: var(--rose); }
+
+  .about-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  @media(max-width:700px) { .about-wrap { grid-template-columns: 1fr; } }
+
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text);
+    border-left: 3px solid var(--rose);
+    padding-left: 28px;
+  }
+
+  .vibes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .vibe-tag {
+    background: #1a1030;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    color: var(--text);
+    transition: all 0.25s;
+    box-shadow: 0 2px 10px rgba(168,85,247,0.1);
+  }
+
+  .vibe-tag:hover {
+    background: #4c1d95;
+    border-color: var(--rose);
+    transform: translateY(-3px);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: #1a1030;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(168,85,247,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(168,85,247,0.3), transparent);
+    border-radius: 50%;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(168,85,247,0.2);
+  }
+
+  .card-icon { font-size: 2.2rem; margin-bottom: 14px; display: block; }
+
+  .card-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: var(--rose);
+    margin-bottom: 6px;
+  }
+
+  .card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .card-sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.7;
+  }
+
+  .floral-divider {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--rose);
+    letter-spacing: 1em;
+    padding: 20px 0;
+    opacity: 0.6;
+    position: relative;
+    z-index: 1;
+  }
+
+  .night-card {
+    background: linear-gradient(135deg, #1a0a1a, #2a1a3a);
+    border-radius: 28px;
+    padding: 52px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .night-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(216,200,240,0.2), transparent);
+    border-radius: 50%;
+  }
+
+  .night-moon {
+    font-size: 5rem;
+    animation: moonFloat 4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes moonFloat {
+    0%,100%{transform:translateY(0) rotate(-10deg)}
+    50%{transform:translateY(-14px) rotate(8deg)}
+  }
+
+  .night-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-style: italic;
+    color: var(--lavender);
+    margin-bottom: 12px;
+  }
+
+  .night-text p {
+    color: #9a8aaa;
+    line-height: 1.9;
+    max-width: 500px;
+    font-size: 0.95rem;
+  }
+
+  .tot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .tot-card {
+    background: #1a1030;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(168,85,247,0.1);
+    transition: box-shadow 0.3s;
+  }
+
+  .tot-card:hover { box-shadow: 0 10px 30px rgba(168,85,247,0.25); }
+
+  .tot-question {
+    padding: 14px 20px 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    color: var(--rose);
+  }
+
+  .tot-options {
+    display: flex;
+    height: 85px;
+  }
+
+  .tot-opt-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    color: var(--muted);
+    user-select: none;
+    background: #120d24;
+  }
+
+  .tot-opt-btn:hover { background: #2d1b69; color: var(--text); }
+
+  .tot-opt-btn.friend-chosen {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: white;
+    font-weight: 600;
+    flex: 2;
+  }
+
+  .tot-opt-btn.friend-not {
+    background: #0f0a1e;
+    color: #3a2a5a;
+    flex: 0.6;
+    font-size: 0.78rem;
+  }
+
+  .tot-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+
+  .tot-reveal {
+    padding: 11px 20px;
+    font-size: 0.82rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .tot-reveal.match { color: #c084fc; background: #1a0a2e; }
+  .tot-reveal.nomatch { color: var(--muted); background: #120d24; }
+
+  .score-box {
+    margin-top: 40px;
+    background: linear-gradient(135deg, #1a0a2e, #2d1b69);
+    border: 1.5px solid var(--border);
+    border-radius: 28px;
+    padding: 52px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(168,85,247,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .score-box::before {
+    content: '✿  ✾  ✿';
+    position: absolute;
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: var(--rose);
+    opacity: 0.4;
+    letter-spacing: 1em;
+  }
+
+  .score-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+
+  .score-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    font-weight: 600;
+    color: var(--rose);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .score-big span {
+    font-size: 2.2rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .score-bar-wrap {
+    background: #2d1b69;
+    border-radius: 100px;
+    height: 8px;
+    width: 100%;
+    max-width: 360px;
+    margin: 16px auto;
+    overflow: hidden;
+  }
+
+  .score-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #7c3aed, #c084fc);
+    border-radius: 100px;
+    transition: width 1.2s ease;
+  }
+
+  .score-percent {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .score-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-style: italic;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  .score-reset {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 12px 36px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(168,85,247,0.4);
+  }
+
+  .score-reset:hover { transform: scale(1.05); }
+
+  /* ✿ FEEDBACK */
+  .feedback-form {
+    background: #1a1030;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 36px;
+    max-width: 680px;
+    box-shadow: 0 6px 30px rgba(168,85,247,0.15);
+    margin-bottom: 40px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  @media(max-width:600px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    color: var(--rose);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: #0f0a1e;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.2);
+  }
+
+  .char-count {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 4px;
+  }
+
+  .fb-submit {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 13px 36px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(168,85,247,0.4);
+    width: 100%;
+  }
+
+  .fb-submit:hover { transform: scale(1.02); box-shadow: 0 10px 28px rgba(168,85,247,0.55); }
+
+  .fb-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 10px;
+  }
+
+  .fb-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 2;
+  }
+
+  .fb-card {
+    background: #1a1030;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(168,85,247,0.1);
+    position: relative;
+    transition: transform 0.25s;
+    animation: popIn 0.4s ease;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.92) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .fb-card:hover { transform: translateY(-4px); }
+
+  .fb-card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .fb-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .fb-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: var(--rose);
+  }
+
+  .fb-time {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .fb-mood {
+    margin-left: auto;
+    font-size: 1.3rem;
+  }
+
+  .fb-msg {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .fb-quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--blush);
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: linear-gradient(135deg, var(--blush), var(--rose));
+    color: white;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    z-index: 9999;
+    transition: transform 0.4s ease;
+    box-shadow: 0 8px 24px rgba(232,160,166,0.4);
+    pointer-events: none;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  .fb-delete {
+    position: absolute;
+    top: 12px; right: 14px;
+    background: none;
+    border: none;
+    color: #ddd;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .fb-delete:hover { color: var(--rose); }
+
+  .fb-section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: var(--rose);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .fb-count {
+    background: var(--blush);
+    color: white;
+    border-radius: 100px;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    font-family: 'Jost', sans-serif;
+  }
+
+  footer {
+    padding: 60px 8vw;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    background: #0a0718;
+  }
+
+  .footer-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+  }
+
+  .footer-copy { font-size: 0.8rem; color: var(--muted); }
+  .footer-flowers { font-size: 1.2rem; letter-spacing: 0.5em; color: var(--rose); opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- HERO -->
+<header>
+  <div class="hero-deco">✿ &nbsp; ✿ &nbsp; ✿</div>
+  <h1 class="hero-name">Ansh<em>ika</em></h1>
+  <div class="hero-script">dancer · dreamer · night owl</div>
+  <p class="hero-desc">A curious soul with a love for dancing and midnight adventures. Welcome to my little corner of the world 🌙</p>
+  <div class="hero-badges">
+    <span class="hero-badge">💛 Yellow is my color</span>
+    <span class="hero-badge">🌙 Night owl</span>
+    <span class="hero-badge">🇰🇷 Korea dreamer</span>
+    <span class="hero-badge">💃 Born to dance</span>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- MARQUEE STRIP -->
+<div class="strip-wrap">
+  <div class="strip-track">
+    <span class="strip-item"><span class="strip-dot"></span>💛 Yellow is life</span>
+    <span class="strip-item"><span class="strip-dot"></span>💃 Born to dance</span>
+    <span class="strip-item"><span class="strip-dot"></span>🍜 Maggie addict</span>
+    <span class="strip-item"><span class="strip-dot"></span>🏸 Badminton player</span>
+    <span class="strip-item"><span class="strip-dot"></span>🌙 Night owl</span>
+    <span class="strip-item"><span class="strip-dot"></span>🇰🇷 Korea dreamer</span>
+    <span class="strip-item"><span class="strip-dot"></span>🌸 Aesthetic soul</span>
+    <span class="strip-item"><span class="strip-dot"></span>💛 Yellow is life</span>
+    <span class="strip-item"><span class="strip-dot"></span>💃 Born to dance</span>
+    <span class="strip-item"><span class="strip-dot"></span>🍜 Maggie addict</span>
+    <span class="strip-item"><span class="strip-dot"></span>🏸 Badminton player</span>
+    <span class="strip-item"><span class="strip-dot"></span>🌙 Night owl</span>
+    <span class="strip-item"><span class="strip-dot"></span>🇰🇷 Korea dreamer</span>
+    <span class="strip-item"><span class="strip-dot"></span>🌸 Aesthetic soul</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section>
+  <div class="section-label">✿ about me</div>
+  <div class="about-wrap">
+    <div>
+      <h2 class="section-title">Hello, I'm<br><em>Anshika</em></h2>
+      <blockquote class="about-quote">
+        "A girl who expresses herself through dance, lives for late nights, and dreams of Seoul under city lights."
+      </blockquote>
+    </div>
+    <div class="vibes">
+      <span class="vibe-tag">🌙 Night Owl</span>
+      <span class="vibe-tag">💛 Yellow obsessed</span>
+      <span class="vibe-tag">💃 Dancer at heart</span>
+      <span class="vibe-tag">🏸 Badminton enthusiast</span>
+      <span class="vibe-tag">🇰🇷 Korea dreamer</span>
+      <span class="vibe-tag">🍜 Maggie = happiness</span>
+      <span class="vibe-tag">🌸 Aesthetic lover</span>
+      <span class="vibe-tag">✨ Dreamer</span>
+    </div>
+  </div>
+</section>
+
+<div class="floral-divider">✿ &nbsp; ✾ &nbsp; ✿ &nbsp; ✾ &nbsp; ✿</div>
+
+<!-- FAVORITES -->
+<section>
+  <div class="section-label">✿ my favorites</div>
+  <h2 class="section-title">Things I <em>Love</em></h2>
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">🎨</span>
+      <div class="card-title">Favorite Color</div>
+      <div class="card-value">Yellow ☀️</div>
+      <div class="card-sub">Bright, warm, and full of energy — just like my personality when I'm comfortable around you.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">💃</span>
+      <div class="card-title">Favorite Hobby</div>
+      <div class="card-value">Dancing</div>
+      <div class="card-sub">Movement is my language. When words aren't enough, I let my body do the talking.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🍜</span>
+      <div class="card-title">Favorite Food</div>
+      <div class="card-value">Maggie</div>
+      <div class="card-sub">Simple, quick, and deeply satisfying. The ultimate comfort food that never disappoints.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📱</span>
+      <div class="card-title">Fav Platform</div>
+      <div class="card-value">ChatGPT</div>
+      <div class="card-sub">My go-to for learning, exploring ideas, and satisfying late-night curiosity.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏸</span>
+      <div class="card-title">Favorite Sport</div>
+      <div class="card-value">Badminton</div>
+      <div class="card-sub">Fast, fun, and surprisingly intense. The perfect sport for someone who loves a good challenge.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">✈️</span>
+      <div class="card-title">Dream Destination</div>
+      <div class="card-value">South Korea 🇰🇷</div>
+      <div class="card-sub">Seoul's city lights, cherry blossoms, street food, and culture — a dream that feels so close.</div>
+    </div>
+  </div>
+</section>
+
+<div class="floral-divider">✿ &nbsp; ✾ &nbsp; ✿ &nbsp; ✾ &nbsp; ✿</div>
+
+<!-- NIGHT OWL -->
+<section>
+  <div class="section-label">✿ my vibe</div>
+  <div class="night-card">
+    <div class="night-moon">🌙</div>
+    <div class="night-text">
+      <h3>Certified Night Owl</h3>
+      <p>While the world sleeps, Anshika thrives. The quiet of the night brings clarity, creativity, and that perfect focus for deep thinking, dancing in her room, and late-night daydreams. Midnight is her golden hour. ✨</p>
+    </div>
+  </div>
+</section>
+
+<!-- THIS OR THAT -->
+<section>
+  <div class="section-label">✿ this or that</div>
+  <h2 class="section-title">How well do you <em>know me?</em></h2>
+  <div class="tot-grid" id="thisorthat"></div>
+</section>
+
+<!-- FEEDBACK -->
+<div class="floral-divider">✿ &nbsp; ✾ &nbsp; ✿ &nbsp; ✾ &nbsp; ✿</div>
+<section>
+  <div class="section-label">✿ leave a message</div>
+  <h2 class="section-title">Say something <em>sweet</em> 🌸</h2>
+
+  <!-- Input Form -->
+  <div class="feedback-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Name 🌸</label>
+        <input type="text" id="fb-name" placeholder="e.g. Priya, Riya..." maxlength="30"/>
+      </div>
+      <div class="form-group">
+        <label>Mood ✨</label>
+        <select id="fb-mood">
+          <option value="🌸">🌸 Soft</option>
+          <option value="💛">💛 Happy</option>
+          <option value="🔥">🔥 Hyped</option>
+          <option value="🥹">🥹 Emotional</option>
+          <option value="😂">😂 Funny</option>
+          <option value="💜">💜 Wholesome</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Your Message 💌</label>
+      <textarea id="fb-msg" placeholder="Tell Anshika something sweet..." maxlength="200" rows="3"></textarea>
+      <div class="char-count"><span id="char-num">0</span>/200</div>
+    </div>
+    <button class="fb-submit" onclick="submitFeedback()">Send Message 💌</button>
+  </div>
+
+  <!-- Messages Wall -->
+  <div class="fb-wall" id="fb-wall">
+    <div class="fb-empty" id="fb-empty">
+      <div style="font-size:2.5rem">💌</div>
+      <p>No messages yet... be the first to say something sweet!</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Anshika ✿</div>
+  <div class="footer-flowers">🌸 🌼 🌸</div>
+  <div class="footer-copy">Made with 💛 · aesthetic edition</div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Floating petals
+  const petalEmojis = ['🌸','🌼','✿','🌺','💮'];
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+    document.body.appendChild(p);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .about-quote, .night-card, .vibe-tag').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity 0.6s ${i * 0.05}s ease, transform 0.6s ${i * 0.05}s ease`;
+    observer.observe(el);
+  });
+
+  // FEEDBACK
+  const textarea = document.getElementById('fb-msg');
+  const charNum = document.getElementById('char-num');
+  if (textarea) {
+    textarea.addEventListener('input', () => {
+      charNum.textContent = textarea.value.length;
+    });
+  }
+
+  const avatarColors = ['#4c1d95','#6d28d9','#7c3aed','#2d1b69','#5b21b6','#4338ca'];
+  let feedbacks = JSON.parse(localStorage.getItem('anshika_feedbacks') || '[]');
+
+  function saveFeedbacks() {
+    localStorage.setItem('anshika_feedbacks', JSON.stringify(feedbacks));
+  }
+
+  function timeAgo(ts) {
+    const diff = Math.floor((Date.now() - ts) / 1000);
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+    return Math.floor(diff/86400) + 'd ago';
+  }
+
+  function renderFeedbacks() {
+    const wall = document.getElementById('fb-wall');
+    const empty = document.getElementById('fb-empty');
+    wall.innerHTML = '';
+    if (feedbacks.length === 0) {
+      wall.innerHTML = `<div class="fb-empty"><div style="font-size:2.5rem">💌</div><p>No messages yet... be the first to say something sweet!</p></div>`;
+      return;
+    }
+
+    // Count label
+    const countEl = document.createElement('div');
+    countEl.className = 'fb-section-title';
+    countEl.style.gridColumn = '1 / -1';
+    countEl.innerHTML = `Messages for Anshika <span class="fb-count">${feedbacks.length}</span>`;
+    wall.appendChild(countEl);
+
+    [...feedbacks].reverse().forEach((fb, idx) => {
+      const realIdx = feedbacks.length - 1 - idx;
+      const card = document.createElement('div');
+      card.className = 'fb-card';
+      const color = avatarColors[realIdx % avatarColors.length];
+      const initial = fb.name ? fb.name[0].toUpperCase() : '?';
+      card.innerHTML = `
+        <button class="fb-delete" onclick="deleteFeedback(${realIdx})" title="Delete">✕</button>
+        <div class="fb-card-top">
+          <div class="fb-avatar" style="background:${color}">${initial}</div>
+          <div>
+            <div class="fb-name">${fb.name || 'Anonymous'}</div>
+            <div class="fb-time">${timeAgo(fb.ts)}</div>
+          </div>
+          <div class="fb-mood">${fb.mood}</div>
+        </div>
+        <span class="fb-quote-mark">"</span>
+        <div class="fb-msg">${fb.msg}</div>
+      `;
+      wall.appendChild(card);
+    });
+  }
+
+  function submitFeedback() {
+    const name = document.getElementById('fb-name').value.trim();
+    const msg = document.getElementById('fb-msg').value.trim();
+    const mood = document.getElementById('fb-mood').value;
+
+    if (!msg) { showToast('Please write a message first 🌸'); return; }
+
+    feedbacks.push({ name: name || 'Anonymous', msg, mood, ts: Date.now() });
+    saveFeedbacks();
+    renderFeedbacks();
+
+    document.getElementById('fb-name').value = '';
+    document.getElementById('fb-msg').value = '';
+    document.getElementById('char-num').textContent = '0';
+    showToast('Message sent to Anshika! 💌');
+  }
+
+  function deleteFeedback(idx) {
+    feedbacks.splice(idx, 1);
+    saveFeedbacks();
+    renderFeedbacks();
+  }
+
+  function showToast(msg) {
+    let t = document.querySelector('.toast');
+    if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  renderFeedbacks();
+
+  // THIS OR THAT
+  const totData = [
+    { a: '🍵 Tea', b: '☕ Coffee', chosen: 'a' },
+    { a: '🏖️ Beach', b: '⛰️ Mountains', chosen: 'b' },
+    { a: '🎵 Spotify', b: '▶️ YouTube', chosen: 'b' },
+    { a: '💃 Dance', b: '🎤 Sing', chosen: 'a' },
+    { a: '💬 Texting', b: '📞 Calling', chosen: 'a' },
+    { a: '☀️ Summer', b: '❄️ Winter', chosen: 'a' },
+    { a: '🌑 Dark Mode', b: '☀️ Light Mode', chosen: 'a' },
+    { a: '🧘 Alone Time', b: '👯 Friend Time', chosen: 'a' },
+  ];
+
+  const friendAnswers = {};
+  const grid = document.getElementById('thisorthat');
+
+  function renderCards() {
+    grid.innerHTML = '';
+    totData.forEach((item, i) => {
+      const friendPick = friendAnswers[i];
+      const card = document.createElement('div');
+      card.className = 'tot-card';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+
+      let aClass = 'tot-opt-btn';
+      let bClass = 'tot-opt-btn';
+      let revealHTML = '';
+
+      if (friendPick) {
+        aClass += friendPick === 'a' ? ' friend-chosen' : ' friend-not';
+        bClass += friendPick === 'b' ? ' friend-chosen' : ' friend-not';
+        const match = friendPick === item.chosen;
+        revealHTML = `<div class="tot-reveal ${match ? 'match' : 'nomatch'}">
+          ${match ? '🎉 You match Anshika!' : `🌸 Anshika picks ${item.chosen === 'a' ? item.a : item.b}`}
+        </div>`;
+      }
+
+      card.innerHTML = `
+        <div class="tot-question">Q${i+1}: ${item.a.replace(/[^\w\s]/gi,'').trim()} or ${item.b.replace(/[^\w\s]/gi,'').trim()}?</div>
+        <div class="tot-options">
+          <div class="${aClass}" data-idx="${i}" data-pick="a">${item.a}</div>
+          <div class="tot-divider"></div>
+          <div class="${bClass}" data-idx="${i}" data-pick="b">${item.b}</div>
+        </div>
+        ${revealHTML}
+      `;
+      grid.appendChild(card);
+    });
+
+    const answered = Object.keys(friendAnswers).length;
+    let scoreEl = document.getElementById('tot-score');
+    if (answered === totData.length) {
+      const matches = totData.filter((item, i) => friendAnswers[i] === item.chosen).length;
+      if (!scoreEl) {
+        scoreEl = document.createElement('div');
+        scoreEl.id = 'tot-score';
+        grid.parentElement.appendChild(scoreEl);
+      }
+      const percent = Math.round((matches / totData.length) * 100);
+      const msg = matches === 8 ? "You're basically Anshika's twin! 🤯" :
+                  matches >= 6 ? "You two vibe so hard together! 🔥" :
+                  matches >= 4 ? "A lovely match! You have a lot in common 💛" :
+                  matches >= 2 ? "You're quite different from Anshika 😄" :
+                  "Opposites attract! Barely anything in common 😂";
+      const emoji = matches === 8 ? '🏆' : matches >= 6 ? '🌟' : matches >= 4 ? '💛' : matches >= 2 ? '🌸' : '😂';
+      scoreEl.innerHTML = `
+        <div class="score-box">
+          <div class="score-emoji">${emoji}</div>
+          <div class="score-big">${matches}<span> / 8</span></div>
+          <div class="score-bar-wrap"><div class="score-bar" style="width:${percent}%"></div></div>
+          <div class="score-percent">${percent}% match with Anshika</div>
+          <div class="score-title">${msg}</div>
+          <button class="score-reset" onclick="resetGame()">🔄 Try Again</button>
+        </div>`;
+    } else if (scoreEl) {
+      scoreEl.remove();
+    }
+
+    document.querySelectorAll('.tot-opt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx);
+        if (!friendAnswers[idx]) {
+          friendAnswers[idx] = btn.dataset.pick;
+          renderCards();
+        }
+      });
+    });
+  }
+
+  function resetGame() {
+    Object.keys(friendAnswers).forEach(k => delete friendAnswers[k]);
+    renderCards();
+  }
+
+  renderCards();
+</script>
+</body>
+</html>
